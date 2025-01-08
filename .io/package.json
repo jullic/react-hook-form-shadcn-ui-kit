@@ -1,0 +1,16 @@
+{
+  "name": "io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.12.7"
+  },
+  "dependencies": {
+    "inquirer-scene": "^1.2.5",
+    "io-cli-templater": "^0.3.0",
+    "ts-morph": "^22.0.0"
+  }
+}

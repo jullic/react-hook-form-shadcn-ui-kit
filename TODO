@@ -1,0 +1,29 @@
+[ ] Компоненты
+	[ ] Input (with mask)
+	[ ] PasswordInput
+	[ ] Select
+	[ ] InfinitySelect
+	[ ] TreeSelect
+	[ ] DateInput
+	[ ] DatePicker
+	[ ] DateTimePicker
+	[ ] TimeInput
+	[ ] TimePicker
+	[ ] WeekPicker
+	[ ] MonthPicker
+	[ ] YearPicker
+	[ ] Checkbox
+	[ ] RadioGroup
+	[ ] Switch
+	[ ] TextArea
+	[ ] TextEditor
+
+
+[ ] Сделать UI KIT для полей ввода
+	[ ] Поддержка unit
+	[ ] Поддержка вывода описания поля
+	[ ] Поддержка вывода ошибок и предупреждений
+	[ ] Поддержка иконок справа от input
+	[ ] Поддержка маски
+	[ ] Поддержка сброса значения
+

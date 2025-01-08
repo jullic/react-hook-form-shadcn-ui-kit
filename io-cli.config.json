@@ -1,0 +1,23 @@
+{
+	"modules": [
+		"templater",
+		"react-module-css"
+	],
+	"templater": {
+		"rootTemplatesPath": ".io/@templates"
+	},
+	"include": [
+		".io"
+	],
+	"exclude": [
+		"./node_modules",
+		".io/node_modules"
+	],
+	"reactCss": {
+		"functionClassNamesWrapper": {
+			"functionName": "clsx",
+			"defaultImport": false,
+			"lib": "clsx"
+		}
+	}
+}
