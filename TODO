@@ -7,8 +7,8 @@
 	[ ] TreeSelect
 	[x] DateInput
 	[x] DatePicker
-	[ ] DateTimePicker
-	[ ] TimeInput
+	[x] DateTimePicker
+	[x] TimeInput
 	[ ] TimePicker
 	[ ] WeekPicker
 	[ ] MonthPicker

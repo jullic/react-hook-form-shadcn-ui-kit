@@ -11,7 +11,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { cn } from '@/lib/utils';
 import { DateInput } from '../DateInput';
 
-export const DatePicker: FC<IDatePickerProps> = ({ dateInputProps, calendarProps, value, onChange, ...props }) => {
+export const DatePicker: FC<IDatePickerProps> = ({ dateInputProps, calendarProps, value, onChange, disabled, ...props }) => {
 	const [date, setDate] = useState<Date | undefined>(value ?? undefined);
 	const [currentMonth, setCurrentMonth] = useState(date);
 	const [open, setOpen] = useState(false);
@@ -37,58 +37,58 @@ export const DatePicker: FC<IDatePickerProps> = ({ dateInputProps, calendarProps
 
 	return (
 		<Popover open={open}>
-			<PopoverTrigger className='w-full'>
+			<PopoverTrigger disabled={disabled} className='w-full'>
 				<span className='relative w-full' data-date-picker-input ref={rootRef}>
-					<span className='w-full'>
-						<DateInput
-							mask={{
-								mask: Date,
-								ref: inputRef,
-								lazy: false,
-								autofix: true,
-								onComplete: (e) => {
-									const [day, month, year] = e.split('.');
-									const newDate = new Date(+year, +month - 1, +day);
-									setDate(newDate);
-									onChange?.(newDate);
-									setCurrentMonth(newDate);
-								},
-							}}
-							onFocus={() => {
-								setOpen(true);
-							}}
-							{...props}
-							{...(dateInputProps as any)}
-							additionalContent={
-								<span className='absolute right-0 bottom-0 flex items-center'>
-									<Button
-										asChild
-										onClick={() => {
-											setDate(undefined);
-											onChange?.(null);
-											if (inputRef.current) {
-												// @ts-ignore
-												inputRef.current.maskRef.value = '';
-											}
-										}}
-										variant={'link'}
-										className={cn('pr-2', { ['hidden']: !date })}
-									>
-										<span>
-											<X />
-										</span>
-									</Button>
-									<span className='py-2 pr-2 h-9 flex items-center'>
-										<CalendarIcon className='h-4 w-4' />
+					<DateInput
+						disabled={disabled}
+						mask={{
+							mask: Date,
+							ref: inputRef,
+							lazy: false,
+							autofix: true,
+							onComplete: (e) => {
+								const [day, month, year] = e.split('.');
+								const newDate = new Date(+year, +month - 1, +day);
+								setDate(newDate);
+								onChange?.(newDate);
+								setCurrentMonth(newDate);
+							},
+						}}
+						onFocus={() => {
+							setOpen(true);
+						}}
+						{...props}
+						{...(dateInputProps as any)}
+						additionalContent={
+							<span className='absolute right-0 bottom-0 flex items-center'>
+								<Button
+									asChild
+									onClick={() => {
+										setDate(undefined);
+										onChange?.(null);
+										if (inputRef.current) {
+											// @ts-ignore
+											inputRef.current.maskRef.value = '';
+										}
+									}}
+									variant={'link'}
+									className={cn('pr-2', { ['hidden']: !date })}
+								>
+									<span>
+										<X />
 									</span>
+								</Button>
+								<span className='py-2 pr-2 h-9 flex items-center'>
+									<CalendarIcon className='h-4 w-4' />
 								</span>
-							}
-						/>
-					</span>
+							</span>
+						}
+					/>
 				</span>
 			</PopoverTrigger>
 			<PopoverContent className='w-min p-0' align='start' onOpenAutoFocus={(e) => e.preventDefault()}>
 				<Calendar
+					disabled={disabled}
 					mode='single'
 					selected={date}
 					month={currentMonth}

@@ -34,7 +34,7 @@ const Input: FC<IInputProps> = ({
 	return (
 		<FieldWrapper {...wrapperProps}>
 			<span className='grid grid-cols-[minmax(1%,100%)_min-content]'>
-				<span className='relative'>
+				<span className='relative h-min'>
 					<Component {...mask} {...(inputProps as any)} />
 					{additionalContent}
 				</span>
