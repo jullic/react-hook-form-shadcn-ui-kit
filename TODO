@@ -1,22 +1,27 @@
 [ ] Компоненты
-	[ ] Input (with mask)
-	[ ] PasswordInput
-	[ ] Select
+	[x] Input (with mask)
+	[x] PasswordInput
+	[x] Select
+	[x] MultiSelect (select)
 	[ ] InfinitySelect
 	[ ] TreeSelect
-	[ ] DateInput
-	[ ] DatePicker
+	[x] DateInput
+	[x] DatePicker
 	[ ] DateTimePicker
 	[ ] TimeInput
 	[ ] TimePicker
 	[ ] WeekPicker
 	[ ] MonthPicker
 	[ ] YearPicker
+	[ ] YearMonthPicker
 	[ ] Checkbox
 	[ ] RadioGroup
 	[ ] Switch
 	[ ] TextArea
 	[ ] TextEditor
+	[ ] Slider
+
+	[ ] Table
 
 
 [ ] Сделать UI KIT для полей ввода

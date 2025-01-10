@@ -3,8 +3,8 @@ import { FC } from 'react';
 
 import { IInputProps } from './Input.props';
 import { cn } from '@/lib/utils';
-import { FieldWrapper } from '../FieldWrapper';
 import { IMaskInput } from 'react-imask';
+import { FieldWrapper } from '@/components/helpers/FieldWrapper';
 
 const Input: FC<IInputProps> = ({
 	className,

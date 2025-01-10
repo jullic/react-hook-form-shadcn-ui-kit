@@ -11,7 +11,7 @@ export const FieldLabel: FC<IFieldLabelProps> = ({ children, required, status, l
 			{...props}
 		>
 			{label && (
-				<p>
+				<p className='text-muted-foreground'>
 					{label}
 					{required ? '*' : ''}
 				</p>

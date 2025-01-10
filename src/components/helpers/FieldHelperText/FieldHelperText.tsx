@@ -4,7 +4,6 @@ import { IFieldHelperTextProps } from './FieldHelperText.props';
 import { cn } from '@/lib/utils';
 
 export const FieldHelperText: FC<IFieldHelperTextProps> = ({ helperText, status, children, ...props }) => {
-	console.log(status);
 	return (
 		<div className='grid w-full gap-1' {...props}>
 			{children}

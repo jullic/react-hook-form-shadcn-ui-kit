@@ -15,6 +15,7 @@ const meta: Meta<IInputProps> = {
 		mask: { control: 'object' },
 		additionalContent: { control: false },
 		unit: { control: 'text' },
+		disabled: { control: 'boolean' },
 	},
 };
 
@@ -41,6 +42,7 @@ WithMask.args = {
 	helperText: 'Example with mask.',
 	mask: {
 		mask: '+{7} (000) 000-00-00',
+		lazy: false,
 	},
 };
 

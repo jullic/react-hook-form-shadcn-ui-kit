@@ -1,17 +1,13 @@
-import { Input } from './components/fields/Input';
+import { useState } from 'react';
+import { DatePicker } from './components/fields';
 
 function App() {
+	const [state, setState] = useState(null);
+
 	return (
-		<div className='h-screen bg-sky-600 w-screen p-16'>
-			<Input
-				required
-				label='test'
-				descriptionText='test description'
-				helperText='Incorrect field'
-				status='warning'
-				unit='ters'
-				disabled
-			/>
+		<div className='h-screen bg-background w-screen p-16'>
+			{/* <DateInput value={state} mask={{ onAccept: (value) => setState(value) }} /> */}
+			<DatePicker value={state} onChange={(e) => setState(e)} />
 		</div>
 	);
 }
