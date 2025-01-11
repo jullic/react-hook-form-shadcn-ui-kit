@@ -61,23 +61,25 @@ export const DatePicker: FC<IDatePickerProps> = ({ dateInputProps, calendarProps
 						{...(dateInputProps as any)}
 						additionalContent={
 							<span className='absolute right-0 bottom-0 flex items-center'>
-								<Button
-									asChild
-									onClick={() => {
-										setDate(undefined);
-										onChange?.(null);
-										if (inputRef.current) {
-											// @ts-ignore
-											inputRef.current.maskRef.value = '';
-										}
-									}}
-									variant={'link'}
-									className={cn('pr-2', { ['hidden']: !date })}
-								>
-									<span>
-										<X />
-									</span>
-								</Button>
+								{!disabled && (
+									<Button
+										asChild
+										onClick={() => {
+											setDate(undefined);
+											onChange?.(null);
+											if (inputRef.current) {
+												// @ts-ignore
+												inputRef.current.maskRef.value = '';
+											}
+										}}
+										variant={'link'}
+										className={cn('pr-2 cursor-pointer', { ['hidden']: !date })}
+									>
+										<span>
+											<X />
+										</span>
+									</Button>
+								)}
 								<span className='py-2 pr-2 h-9 flex items-center'>
 									<CalendarIcon className='h-4 w-4' />
 								</span>

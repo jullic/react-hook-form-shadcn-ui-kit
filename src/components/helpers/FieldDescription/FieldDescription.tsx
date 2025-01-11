@@ -6,7 +6,7 @@ export const FieldDescription: FC<IFieldDescriptionProps> = ({ descriptionText, 
 	return (
 		<div className='grid w-full gap-1' {...props}>
 			{children}
-			{descriptionText && <p className='text-xs text-muted-foreground'>{descriptionText}</p>}
+			{descriptionText && <p className='text-xs text-muted-foreground text-start'>{descriptionText}</p>}
 		</div>
 	);
 };

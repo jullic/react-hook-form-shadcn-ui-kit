@@ -7,14 +7,14 @@
 	[ ] TreeSelect
 	[x] DateInput
 	[x] DatePicker
-	[x] DateTimePicker
 	[x] TimeInput
+	[x] DateTimePicker
 	[ ] TimePicker
 	[ ] WeekPicker
 	[ ] MonthPicker
 	[ ] YearPicker
 	[ ] YearMonthPicker
-	[ ] Checkbox
+	[x] Checkbox
 	[ ] RadioGroup
 	[ ] Switch
 	[ ] TextArea
@@ -25,10 +25,11 @@
 
 
 [ ] Сделать UI KIT для полей ввода
-	[ ] Поддержка unit
-	[ ] Поддержка вывода описания поля
-	[ ] Поддержка вывода ошибок и предупреждений
-	[ ] Поддержка иконок справа от input
-	[ ] Поддержка маски
+	[x] Поддержка unit
+	[ ] Поддержка int / float (min / max)
+	[x] Поддержка вывода описания поля
+	[x] Поддержка вывода ошибок и предупреждений
+	[x] Поддержка иконок справа от input
+	[x] Поддержка маски
 	[ ] Поддержка сброса значения
 

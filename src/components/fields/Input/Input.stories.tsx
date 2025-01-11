@@ -5,7 +5,7 @@ import { Input } from './Input';
 import { IInputProps } from './Input.props';
 
 const meta: Meta<IInputProps> = {
-	title: 'Components/Input',
+	title: 'Fields/Input',
 	component: Input,
 	argTypes: {
 		status: {

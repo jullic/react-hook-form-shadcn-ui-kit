@@ -12,7 +12,15 @@ import { CalendarIcon, Clock, X } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { TimeInput } from '../TimeInput';
 
-export const DateTimePicker: FC<IDateTimePickerProps> = ({ calendarProps, timeInputProps, dateInputProps, onChange, value, disabled }) => {
+export const DateTimePicker: FC<IDateTimePickerProps> = ({
+	calendarProps,
+	timeInputProps,
+	dateInputProps,
+	onChange,
+	value,
+	disabled,
+	...props
+}) => {
 	const [date, setDate] = useState<Date | undefined>(value ?? undefined);
 	const [currentMonth, setCurrentMonth] = useState(date);
 	const [open, setOpen] = useState(false);
@@ -43,7 +51,11 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({ calendarProps, timeIn
 	return (
 		<Popover open={open}>
 			<PopoverTrigger disabled={disabled} className='w-full'>
-				<span className='w-full grid gap-1 grid-cols-[minmax(1%,60%)_minmax(1%,40%)]' data-date-picker-input ref={rootRef}>
+				<span
+					className='w-full grid gap-1 items-end grid-cols-[minmax(1%,60%)_minmax(1%,40%)]'
+					data-date-picker-input
+					ref={rootRef}
+				>
 					<DateInput
 						className='w-full'
 						mask={{
@@ -69,27 +81,30 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({ calendarProps, timeIn
 							setOpen(true);
 						}}
 						disabled={disabled}
+						{...props}
 						{...(dateInputProps as any)}
 						additionalContent={
 							<span className='absolute right-0 bottom-0 flex items-center'>
-								<Button
-									disabled={disabled}
-									asChild
-									onClick={() => {
-										setDate(undefined);
-										onChange?.(null);
-										if (dateInputRef.current) {
-											// @ts-ignore
-											dateInputRef.current.maskRef.value = '';
-										}
-									}}
-									variant={'link'}
-									className={cn('px-1', { ['hidden']: !date })}
-								>
-									<span>
-										<X />
-									</span>
-								</Button>
+								{!disabled && (
+									<Button
+										disabled={disabled}
+										asChild
+										onClick={() => {
+											setDate(undefined);
+											onChange?.(null);
+											if (dateInputRef.current) {
+												// @ts-ignore
+												dateInputRef.current.maskRef.value = '';
+											}
+										}}
+										variant={'link'}
+										className={cn('px-1 cursor-pointer', { ['hidden']: !date })}
+									>
+										<span>
+											<X />
+										</span>
+									</Button>
+								)}
 								<span className='py-2 pr-2 h-9 flex items-center'>
 									<CalendarIcon className='h-4 w-4' />
 								</span>
@@ -112,29 +127,33 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({ calendarProps, timeIn
 								setDate(newDate);
 								onChange?.(newDate);
 								setCurrentMonth(newDate);
+								setOpen(false);
 							},
 						}}
+						{...props}
 						{...timeInputProps}
 						additionalContent={
 							<span className='absolute right-0 bottom-0 flex items-center'>
-								<Button
-									disabled={disabled}
-									asChild
-									onClick={() => {
-										setDate(undefined);
-										onChange?.(null);
-										if (dateInputRef.current) {
-											// @ts-ignore
-											dateInputRef.current.maskRef.value = '';
-										}
-									}}
-									variant={'link'}
-									className={cn('px-1', { ['hidden']: !date })}
-								>
-									<span>
-										<X />
-									</span>
-								</Button>
+								{!disabled && (
+									<Button
+										disabled={disabled}
+										asChild
+										onClick={() => {
+											setDate(undefined);
+											onChange?.(null);
+											if (dateInputRef.current) {
+												// @ts-ignore
+												dateInputRef.current.maskRef.value = '';
+											}
+										}}
+										variant={'link'}
+										className={cn('px-1 cursor-pointer', { ['hidden']: !date })}
+									>
+										<span>
+											<X />
+										</span>
+									</Button>
+								)}
 								<span className='py-2 pr-2 h-9 flex items-center'>
 									<Clock className='h-4 w-4' />
 								</span>
