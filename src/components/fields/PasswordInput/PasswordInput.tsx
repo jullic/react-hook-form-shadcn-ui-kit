@@ -12,10 +12,10 @@ const PasswordInput: FC<IPasswordInputProps> = ({ ...props }) => {
 		<Input
 			{...props}
 			type={isShow ? undefined : 'password'}
-			className='pr-12'
+			className="pr-12"
 			additionalContent={
-				<span className='absolute bottom-0 right-0'>
-					<Button onClick={() => setIsShow((p) => !p)} variant='link'>
+				<span className="absolute bottom-0 right-0">
+					<Button disabled={props.disabled} onClick={() => setIsShow((p) => !p)} variant="link">
 						{isShow ? <Eye /> : <EyeClosed />}
 					</Button>
 				</span>

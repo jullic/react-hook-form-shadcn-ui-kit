@@ -16,21 +16,21 @@
 	[ ] YearMonthPicker
 	[x] Checkbox
 	[ ] RadioGroup
-	[ ] Switch
-	[ ] TextArea
-	[ ] TextEditor
+	[x] Switch
+	[x] TextArea
+	[ ] TextEditor (?? https://platejs.org/ ?? https://github.com/shadcn-ui/ui/issues/786)
 	[ ] Slider
+	[ ] ColorPicker
 
 	[ ] Table
+	[ ] Charts
 
 
 [ ] Сделать UI KIT для полей ввода
 	[x] Поддержка unit
-	[ ] Поддержка int / float (min / max)
+	[x] Поддержка int / float (min / max)
 	[x] Поддержка вывода описания поля
 	[x] Поддержка вывода ошибок и предупреждений
 	[x] Поддержка иконок справа от input
 	[x] Поддержка маски
 	[ ] Поддержка сброса значения
-
-[ ] Charts

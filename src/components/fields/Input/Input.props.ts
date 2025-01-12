@@ -9,4 +9,11 @@ export interface IInputProps extends MergeType<ComponentProps<'input'> & IField>
 	unit?: string | ReactNode;
 	additionalContent?: ReactNode;
 	mask?: IMaskInputProps;
+	inputOptions?: {
+		type: 'int' | 'float';
+		min?: number;
+		max?: number;
+		maxFixed?: number;
+		onBlurParseToNumber?: boolean;
+	};
 }

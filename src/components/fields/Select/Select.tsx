@@ -49,8 +49,6 @@ export const Select = <T extends 'single' | 'multi'>(props: ISelectProps<T>) => 
 	const [defaultValue, setDefaultValue] = useState<string | string[] | number | number[]>(type == 'multi' ? [] : '');
 	const currentValue = value == undefined ? defaultValue : value == null ? '' : value;
 
-	console.log(value);
-
 	const displayValue =
 		typeof (value ?? defaultValue) == 'string' || typeof (value ?? defaultValue) == 'number'
 			? value ?? defaultValue
