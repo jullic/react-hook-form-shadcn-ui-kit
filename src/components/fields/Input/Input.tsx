@@ -6,18 +6,7 @@ import { cn } from '@/lib/utils';
 import { IMaskInput } from 'react-imask';
 import { FieldWrapper } from '@/components/helpers/FieldWrapper';
 
-const Input: FC<IInputProps> = ({
-	className,
-	helperText,
-	descriptionText,
-	label,
-	status,
-	required,
-	additionalContent,
-	unit,
-	mask,
-	...props
-}) => {
+const Input: FC<IInputProps> = ({ className, helperText, descriptionText, label, status, required, additionalContent, unit, mask, value, ...props }) => {
 	const wrapperProps = { descriptionText, helperText, label, status, required };
 	const inputProps = {
 		className: cn(
@@ -33,16 +22,12 @@ const Input: FC<IInputProps> = ({
 
 	return (
 		<FieldWrapper {...wrapperProps}>
-			<span className='grid grid-cols-[minmax(1%,100%)_min-content]'>
-				<span className='relative h-min'>
-					<Component {...mask} {...(inputProps as any)} />
+			<span className="grid grid-cols-[minmax(1%,100%)_min-content]">
+				<span className="relative h-min">
+					<Component {...mask} {...(inputProps as any)} value={value === null ? '' : value} />
 					{additionalContent}
 				</span>
-				{unit && (
-					<span className={cn(inputProps.className, 'rounded-r-md rounded-l-none text-sm !leading-[1.5rem] border-l-0')}>
-						{unit}
-					</span>
-				)}
+				{unit && <span className={cn(inputProps.className, 'rounded-r-md rounded-l-none text-sm !leading-[1.5rem] border-l-0')}>{unit}</span>}
 			</span>
 		</FieldWrapper>
 	);

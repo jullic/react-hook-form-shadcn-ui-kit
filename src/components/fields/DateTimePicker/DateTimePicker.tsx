@@ -19,6 +19,9 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({
 	onChange,
 	value,
 	disabled,
+	label,
+	helperText,
+	descriptionText,
 	...props
 }) => {
 	const [date, setDate] = useState<Date | undefined>(value ?? undefined);
@@ -28,6 +31,7 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({
 	const rootRef = useRef<HTMLInputElement>(null);
 	const dateInputRef = useRef<HTMLInputElement>(null);
 	const timeInputRef = useRef<HTMLInputElement>(null);
+	const dateProps = { label, helperText, descriptionText };
 
 	useOnClickOutside(rootRef as React.RefObject<HTMLInputElement>, (e) => {
 		if (!(e.target instanceof Element)) {
@@ -50,14 +54,10 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({
 
 	return (
 		<Popover open={open}>
-			<PopoverTrigger disabled={disabled} className='w-full'>
-				<span
-					className='w-full grid gap-1 items-end grid-cols-[minmax(1%,60%)_minmax(1%,40%)]'
-					data-date-picker-input
-					ref={rootRef}
-				>
+			<PopoverTrigger disabled={disabled} className="w-full">
+				<span className="w-full grid gap-1 items-end grid-cols-[minmax(1%,60%)_minmax(1%,40%)]" data-date-picker-input ref={rootRef}>
 					<DateInput
-						className='w-full'
+						className="w-full"
 						mask={{
 							mask: Date,
 							ref: dateInputRef,
@@ -82,9 +82,10 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({
 						}}
 						disabled={disabled}
 						{...props}
+						{...dateProps}
 						{...(dateInputProps as any)}
 						additionalContent={
-							<span className='absolute right-0 bottom-0 flex items-center'>
+							<span className="absolute right-0 bottom-0 flex items-center">
 								{!disabled && (
 									<Button
 										disabled={disabled}
@@ -105,8 +106,8 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({
 										</span>
 									</Button>
 								)}
-								<span className='py-2 pr-2 h-9 flex items-center'>
-									<CalendarIcon className='h-4 w-4' />
+								<span className="py-2 pr-2 h-9 flex items-center">
+									<CalendarIcon className="h-4 w-4" />
 								</span>
 							</span>
 						}
@@ -133,7 +134,7 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({
 						{...props}
 						{...timeInputProps}
 						additionalContent={
-							<span className='absolute right-0 bottom-0 flex items-center'>
+							<span className="absolute right-0 bottom-0 flex items-center">
 								{!disabled && (
 									<Button
 										disabled={disabled}
@@ -154,18 +155,18 @@ export const DateTimePicker: FC<IDateTimePickerProps> = ({
 										</span>
 									</Button>
 								)}
-								<span className='py-2 pr-2 h-9 flex items-center'>
-									<Clock className='h-4 w-4' />
+								<span className="py-2 pr-2 h-9 flex items-center">
+									<Clock className="h-4 w-4" />
 								</span>
 							</span>
 						}
 					/>
 				</span>
 			</PopoverTrigger>
-			<PopoverContent className='w-min p-0' align='start' onOpenAutoFocus={(e) => e.preventDefault()}>
+			<PopoverContent className="w-min p-0" align="start" onOpenAutoFocus={(e) => e.preventDefault()}>
 				<Calendar
 					disabled={disabled}
-					mode='single'
+					mode="single"
 					selected={date}
 					month={currentMonth}
 					onMonthChange={(e) => setCurrentMonth(e)}

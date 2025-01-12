@@ -37,8 +37,8 @@ export const DatePicker: FC<IDatePickerProps> = ({ dateInputProps, calendarProps
 
 	return (
 		<Popover open={open}>
-			<PopoverTrigger disabled={disabled} className='w-full'>
-				<span className='relative w-full' data-date-picker-input ref={rootRef}>
+			<PopoverTrigger disabled={disabled} onClick={() => setOpen(true)} className="w-full">
+				<span className="relative w-full" data-date-picker-input ref={rootRef}>
 					<DateInput
 						disabled={disabled}
 						mask={{
@@ -54,13 +54,10 @@ export const DatePicker: FC<IDatePickerProps> = ({ dateInputProps, calendarProps
 								setCurrentMonth(newDate);
 							},
 						}}
-						onFocus={() => {
-							setOpen(true);
-						}}
 						{...props}
 						{...(dateInputProps as any)}
 						additionalContent={
-							<span className='absolute right-0 bottom-0 flex items-center'>
+							<span className="absolute right-0 bottom-0 flex items-center">
 								{!disabled && (
 									<Button
 										asChild
@@ -80,18 +77,18 @@ export const DatePicker: FC<IDatePickerProps> = ({ dateInputProps, calendarProps
 										</span>
 									</Button>
 								)}
-								<span className='py-2 pr-2 h-9 flex items-center'>
-									<CalendarIcon className='h-4 w-4' />
+								<span className="py-2 pr-2 h-9 flex items-center">
+									<CalendarIcon className="h-4 w-4" />
 								</span>
 							</span>
 						}
 					/>
 				</span>
 			</PopoverTrigger>
-			<PopoverContent className='w-min p-0' align='start' onOpenAutoFocus={(e) => e.preventDefault()}>
+			<PopoverContent className="w-min p-0" align="start" onOpenAutoFocus={(e) => e.preventDefault()}>
 				<Calendar
 					disabled={disabled}
-					mode='single'
+					mode="single"
 					selected={date}
 					month={currentMonth}
 					onMonthChange={(e) => setCurrentMonth(e)}

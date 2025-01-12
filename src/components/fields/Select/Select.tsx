@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useState } from 'react';
 import { escapeRegExp } from 'lodash';
 
@@ -50,13 +49,14 @@ export const Select = <T extends 'single' | 'multi'>(props: ISelectProps<T>) => 
 	const [defaultValue, setDefaultValue] = useState<string | string[] | number | number[]>(type == 'multi' ? [] : '');
 	const currentValue = value == undefined ? defaultValue : value == null ? '' : value;
 
+	console.log(value);
+
 	const displayValue =
-		typeof (value ?? defaultValue) == 'string'
+		typeof (value ?? defaultValue) == 'string' || typeof (value ?? defaultValue) == 'number'
 			? value ?? defaultValue
-				? options.find((option) => option.value == currentValue)?.displayCurrentValue ||
-				  options.find((option) => option.value == currentValue)?.label
+				? options.find((option) => option.value == currentValue)?.displayCurrentValue || options.find((option) => option.value == currentValue)?.label
 				: placeholder
-			: ((value ?? defaultValue) as string[]).map((option) => {
+			: ((value ?? defaultValue ?? []) as string[]).map((option) => {
 					const item = options.find((el) => el.value == option);
 					return item;
 			  });
@@ -90,16 +90,18 @@ export const Select = <T extends 'single' | 'multi'>(props: ISelectProps<T>) => 
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
-			<FieldWrapper {...fieldWrapperProps}>
+			<FieldWrapper {...fieldWrapperProps} classNames={{ description: cn({ ['cursor-not-allowed']: props.disabled }) }}>
 				<PopoverTrigger asChild>
 					<Button
-						variant='outline'
-						role='combobox'
+						disabled={props.disabled}
+						variant="outline"
+						role="combobox"
 						aria-expanded={open}
 						className={cn(
 							'justify-between',
 							{ ['border-warning text-warning']: status == 'warning' },
 							{ ['border-destructive text-destructive']: status == 'error' },
+							{ ['cursor-not-allowed']: props.disabled },
 							'overflow-hidden',
 							{ ['min-h-9 h-min py-1']: Array.isArray(displayValue) }
 						)}
@@ -107,55 +109,53 @@ export const Select = <T extends 'single' | 'multi'>(props: ISelectProps<T>) => 
 						<span
 							className={cn(
 								{ ['text-ellipsis overflow-hidden']: typeof displayValue == 'string' },
-								{ ['flex gap-1 flex-1 flex-wrap overflow-hidden']: typeof displayValue == 'object' }
+								{ ['flex gap-1 flex-1 flex-wrap overflow-hidden']: typeof displayValue == 'object' },
+								{ ['cursor-not-allowed']: props.disabled }
 							)}
 						>
 							{!Array.isArray(displayValue)
 								? displayValue
 								: displayValue.map((item) => (
-										<span className='p-1 pl-2 bg-primary rounded-sm text-secondary text-xs flex gap-1 items-center text-ellipsis overflow-hidden'>
-											<span className='text-ellipsis overflow-hidden'>
-												{item?.displayCurrentValue ?? item?.label}
-											</span>
+										<span className="p-1 pl-2 bg-primary rounded-sm text-secondary text-xs flex gap-1 items-center text-ellipsis overflow-hidden">
+											<span className="text-ellipsis overflow-hidden">{item?.displayCurrentValue ?? item?.label}</span>
 											<span
-												role='button'
-												className='px-1 py-0.5 hover:bg-muted hover:text-secondary-foreground rounded-sm transition'
+												role="button"
+												className="px-1 py-0.5 hover:bg-muted hover:text-secondary-foreground rounded-sm transition"
 												onClick={(e) => {
 													e.stopPropagation();
 													e.preventDefault();
 													item && setValue(item?.value + '', item!, options, currentValue);
 												}}
 											>
-												<X className='text-lg !w-3 !h-3' />
+												<X className="text-lg !w-3 !h-3" />
 											</span>
 										</span>
 								  ))}
 						</span>
-						<div className='flex items-center gap-2'>
-							<ChevronsUpDown className='opacity-50' />
-							{loading && <Loader className='animate-spin' />}
+						<div className="flex items-center gap-2">
+							<ChevronsUpDown className="opacity-50" />
+							{loading && <Loader className="animate-spin" />}
 						</div>
 					</Button>
 				</PopoverTrigger>
 			</FieldWrapper>
 			<PopoverContent className={cn('p-0', styles.PopoverContent)}>
 				<Command filter={(value, search, keywords) => (filter(value, search, keywords || [], options) ? 1 : 0)}>
-					<CommandInput placeholder={searchPlaceholder} className='h-9' />
+					<CommandInput placeholder={searchPlaceholder} className="h-9" />
 					<CommandList>
 						<CommandEmpty>{noContent}</CommandEmpty>
-						<CommandGroup className='relative'>
+						<CommandGroup className="relative">
 							{options.map((option) => (
 								<CommandItem
 									key={option.value}
 									value={option.value + ''}
 									onSelect={(value) => {
 										setValue(value, option, options, currentValue);
+										setOpen(false);
 									}}
 								>
 									{option.label}
-									<Check
-										className={cn('ml-auto', check.find((item) => item == option.value) ? 'opacity-100' : 'opacity-0')}
-									/>
+									<Check className={cn('ml-auto', check.find((item) => item == option.value) ? 'opacity-100' : 'opacity-0')} />
 								</CommandItem>
 							))}
 						</CommandGroup>
