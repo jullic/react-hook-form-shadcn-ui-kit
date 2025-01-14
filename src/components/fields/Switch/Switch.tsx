@@ -11,7 +11,7 @@ export const Switch: FC<ISwitchProps> = ({ className, status, helperText, descri
 	return (
 		<FieldHelperText status={status} helperText={helperText}>
 			<FieldDescription descriptionText={descriptionText}>
-				<Label className='flex gap-1 justify-between items-center cursor-pointer'>
+				<Label className="flex gap-1 justify-between items-center cursor-pointer">
 					<p
 						className={cn(
 							'text-primary',
