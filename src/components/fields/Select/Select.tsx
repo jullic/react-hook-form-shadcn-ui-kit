@@ -5,9 +5,9 @@ import { ISelectProps, Option } from './Select.props';
 import { Check, ChevronsUpDown, Loader, X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Button } from '@/components/shadcn-ui/button';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/shadcn-ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/shadcn-ui/popover';
 import { FieldWrapper } from '@/components/helpers/FieldWrapper';
 import styles from './Select.module.css';
 

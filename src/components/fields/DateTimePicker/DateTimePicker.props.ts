@@ -1,5 +1,5 @@
 import { DateInput } from '../DateInput';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar } from '@/components/shadcn-ui/calendar';
 import { TimeInput } from '../TimeInput';
 import { IField } from '@/types/field';
 

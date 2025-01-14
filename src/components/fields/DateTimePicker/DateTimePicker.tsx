@@ -4,12 +4,12 @@ import { FC, useEffect, useRef, useState } from 'react';
 
 import { IDateTimePickerProps } from './DateTimePicker.props';
 import { useOnClickOutside } from 'usehooks-ts';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/shadcn-ui/popover';
 import { DateInput } from '../DateInput';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/shadcn-ui/button';
 import { cn } from '@/lib/utils';
 import { CalendarIcon, Clock, X } from 'lucide-react';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar } from '@/components/shadcn-ui/calendar';
 import { TimeInput } from '../TimeInput';
 
 export const DateTimePicker: FC<IDateTimePickerProps> = ({

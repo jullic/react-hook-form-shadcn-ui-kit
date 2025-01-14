@@ -1,4 +1,4 @@
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar } from '@/components/shadcn-ui/calendar';
 import { DateInput } from '../DateInput';
 import { IField } from '@/types/field';
 

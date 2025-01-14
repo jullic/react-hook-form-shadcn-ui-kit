@@ -4,10 +4,10 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 
 import { IDatePickerProps } from './DatePicker.props';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/shadcn-ui/popover';
+import { Button } from '@/components/shadcn-ui/button';
 import { CalendarIcon, X } from 'lucide-react';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar } from '@/components/shadcn-ui/calendar';
 import { cn } from '@/lib/utils';
 import { DateInput } from '../DateInput';
 

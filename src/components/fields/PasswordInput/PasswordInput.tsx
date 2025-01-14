@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 
 import { IPasswordInputProps } from './PasswordInput.props';
 import { Input } from '../Input';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/shadcn-ui/button';
 import { Eye, EyeClosed } from 'lucide-react';
 
 const PasswordInput: FC<IPasswordInputProps> = ({ ...props }) => {
