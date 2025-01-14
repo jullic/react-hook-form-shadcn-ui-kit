@@ -3,12 +3,23 @@ import { DatePicker } from './components/fields/DatePicker';
 
 import { DateTimePicker } from './components/fields/DateTimePicker';
 import { Checkbox } from './components/fields/Checkbox';
-import { RadioGroup, Slider, Switch, Textarea } from './components/fields';
+
 import { cn } from './lib/utils';
 import { PasswordInput } from './components/fields/PasswordInput';
 import { Select } from './components/fields/Select';
-import { FormCheckbox, FormDatePicker, FormDateTimePicker, FormInput, FormPasswordInput, FormSelect, FormSwitch, FormTextarea } from './components/@react-hook-form';
 import { useForm } from 'react-hook-form';
+import { FormTextarea } from './components/@react-hook-form/FormTextarea';
+import { FormSwitch } from './components/@react-hook-form/FormSwitch';
+import { FormCheckbox } from './components/@react-hook-form/FormCheckbox';
+import { FormDatePicker } from './components/@react-hook-form/FormDatePicker';
+import { FormDateTimePicker } from './components/@react-hook-form/FormDateTimePicker';
+import { FormPasswordInput } from './components/@react-hook-form/FormPasswordInput';
+import { FormSelect } from './components/@react-hook-form/FormSelect';
+import { RadioGroup } from './components/fields/RadioGroup';
+import { Textarea } from './components/fields/Textarea';
+import { FormInput } from './components/@react-hook-form/FormInput';
+import { Slider } from './components/fields/Slider';
+import { Switch } from './components/fields/Switch';
 
 const Wrap = ({ className, ...props }: ComponentProps<'div'>) => <div className={cn('p-8 flex flex-col gap-2', className)} {...props} />;
 

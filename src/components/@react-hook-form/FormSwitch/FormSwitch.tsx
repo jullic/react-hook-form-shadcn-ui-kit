@@ -1,6 +1,6 @@
 import { FieldValues, useController } from 'react-hook-form';
 import { IFormSwitchProps } from './FormSwitch.props';
-import { Switch } from '@/components/fields';
+import { Switch } from '@/components/fields/Switch';
 
 export const FormSwitch = <TFieldValues extends FieldValues = FieldValues>({ ...props }: IFormSwitchProps<TFieldValues>) => {
 	const { name, rules, shouldUnregister, defaultValue, controlDisabled, form, ...otherProps } = props;

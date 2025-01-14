@@ -1,5 +1,5 @@
 import { FieldValues, useController } from 'react-hook-form';
-import { Textarea } from '@/components/fields';
+import { Textarea } from '@/components/fields/Textarea';
 import { IFormTextareaProps } from './FormTextarea.props';
 
 export const FormTextarea = <TFieldValues extends FieldValues = FieldValues>({ ...props }: IFormTextareaProps<TFieldValues>) => {
