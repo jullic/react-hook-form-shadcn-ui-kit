@@ -20,6 +20,9 @@ import { Textarea } from './components/fields/Textarea';
 import { FormInput } from './components/@react-hook-form/FormInput';
 import { Slider } from './components/fields/Slider';
 import { Switch } from './components/fields/Switch';
+import { DataTableDemo } from './components/table/@ExampleTable/ExampleTable';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/shadcn-ui/table';
+import { ExampleTable2 } from './components/table';
 
 const Wrap = ({ className, ...props }: ComponentProps<'div'>) => <div className={cn('p-8 flex flex-col gap-2', className)} {...props} />;
 
@@ -41,7 +44,29 @@ function App() {
 	});
 
 	return (
-		<div className="h-screen w-screen p-4">
+		<div className="h-screen w-dasfull madsax-w-[100vw] p-4">
+			<Wrap>
+				<ExampleTable2 />
+			</Wrap>
+			<Wrap>
+				<span>
+					<Table>
+						<TableHeader>
+							<TableRow>
+								<TableHead>1</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							<TableRow>
+								<TableCell>1</TableCell>
+							</TableRow>
+						</TableBody>
+					</Table>
+				</span>
+			</Wrap>
+			<Wrap>
+				<DataTableDemo />
+			</Wrap>
 			<Wrap>
 				<FormTextarea form={form} name="textarea" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
 			</Wrap>
