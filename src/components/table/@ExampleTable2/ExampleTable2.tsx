@@ -1,7 +1,7 @@
 import { FC, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { IExampleTable2Props } from './ExampleTable2.props';
-import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { ColumnSizingInfoState, ColumnSizingState, createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/shadcn-ui/table';
 import { cn } from '@/lib/utils';
@@ -15,17 +15,24 @@ const columnHelper = createColumnHelper<Item>();
 
 const cols = [columnHelper.accessor('id', { header: 'Id' }), columnHelper.accessor('name', { header: 'Name' })];
 const data = [
-	{ id: '1', name: 'Test 1' },
+	{ id: '1', name: 'Test 1 lorem ipsum dolor sit amet long long text check test' },
 	{ id: '2', name: 'Test 2' },
 ];
 
 export const ExampleTable2: FC<IExampleTable2Props> = () => {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const [defaultSize, setDefaultSize] = useState(0);
+	const [columnSizing, setColumnSizing] = useState<ColumnSizingState>({});
+	const [columnSizingInfo, setColumnSizingInfo] = useState<ColumnSizingInfoState>({} as ColumnSizingInfoState);
+	const refHeaderRefs = useRef<any>(null);
 
 	const colsWithSize = useMemo(() => cols.map((col) => ({ ...col, size: col.size ?? defaultSize })), [defaultSize]);
 	const table = useReactTable({
 		columns: colsWithSize,
+		state: {
+			columnSizing,
+			columnSizingInfo,
+		},
 		data,
 		defaultColumn: {
 			size: defaultSize,
@@ -33,13 +40,20 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 		},
 		getCoreRowModel: getCoreRowModel(),
 		columnResizeMode: 'onChange',
+		onColumnSizingInfoChange: setColumnSizingInfo,
+		onColumnSizingChange: (value) => {
+			refHeaderRefs.current;
+			setColumnSizing(value);
+		},
 	});
 
 	const headerGroups = table.getHeaderGroups();
-	// const headerRefs = headerGroups.map((row) => useRef<HTMLTableRowElement>(null));
+	const headerRefs = headerGroups.map((row) => useRef<HTMLTableRowElement>(null));
 	const rowModel = table.getRowModel();
+	const bodyRowsRefs = rowModel.rows.map((row) => useRef<HTMLTableRowElement>(null));
 
 	useLayoutEffect(() => {
+		refHeaderRefs.current = headerRefs;
 		if (!rootRef.current) {
 			return;
 		}
@@ -49,11 +63,11 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 	}, []);
 
 	return (
-		<div ref={rootRef} className="relative w-full border rounded-lg overflow-auto">
+		<div ref={rootRef} className="relative w-full border rounded-lg overflow-auto grid grid-cols-[minmax(1%,100%)_100%]">
 			<Table className="relative border-collapse w-full overflow-auto z-10" style={{ width: table.getTotalSize() }}>
 				<TableHeader className="w-full">
 					{headerGroups.map((headerGroup, rowI) => (
-						<TableRow key={headerGroup.id}>
+						<TableRow ref={headerRefs[rowI]} key={headerGroup.id}>
 							{headerGroup.headers.map((header, headerI, headers) => (
 								<TableHead
 									style={{ width: header.getSize() }}
@@ -80,7 +94,7 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 				</TableHeader>
 				<TableBody>
 					{rowModel.rows?.map((row, rowI) => (
-						<TableRow key={row.id}>
+						<TableRow ref={bodyRowsRefs[rowI]} key={row.id}>
 							{row.getVisibleCells().map((cell, cellI, visibleCells) => (
 								<TableCell
 									className={cn('border', {
@@ -95,6 +109,42 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 							))}
 						</TableRow>
 					))}
+				</TableBody>
+			</Table>
+
+			<Table className="border-collapse w-full h-full z-0">
+				<TableHeader>
+					{headerRefs.map((ref, i, arr) => {
+						console.log(ref.current);
+						return (
+							<TableRow style={{ height: ref.current?.offsetHeight }} className="relative z-0">
+								<TableHead
+									className={cn('border', {
+										['border-t-0']: i === 0,
+										['border-l-0']: true,
+										['border-r-0']: true,
+										// ['border-b-0']: rowI === rowModel.rows.length - 1,
+									})}
+								></TableHead>
+							</TableRow>
+						);
+					})}
+				</TableHeader>
+				<TableBody>
+					{bodyRowsRefs.map((ref, i, arr) => {
+						console.log(ref.current);
+						return (
+							<TableRow style={{ height: ref.current?.offsetHeight }} className="relative z-0">
+								<TableCell
+									className={cn('border', {
+										['border-l-0']: true,
+										['border-r-0']: true,
+										['border-b-0']: i === arr.length - 1,
+									})}
+								></TableCell>
+							</TableRow>
+						);
+					})}
 				</TableBody>
 			</Table>
 		</div>
