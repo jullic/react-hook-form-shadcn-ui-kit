@@ -20,6 +20,7 @@ const data = [
 ];
 
 export const ExampleTable2: FC<IExampleTable2Props> = () => {
+	const [_, forceUpdate] = useState({});
 	const rootRef = useRef<HTMLDivElement>(null);
 	const [defaultSize, setDefaultSize] = useState(0);
 	const [columnSizing, setColumnSizing] = useState<ColumnSizingState>({});
@@ -60,6 +61,10 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 		const rootWidth = rootRef.current.offsetWidth;
 		const colWidth = rootWidth / cols.length;
 		setDefaultSize(colWidth);
+
+		setTimeout(() => {
+			forceUpdate({});
+		});
 	}, []);
 
 	return (
@@ -112,7 +117,7 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 				</TableBody>
 			</Table>
 
-			<Table className="border-collapse w-full h-full z-0">
+			<Table className="absolute border-collapse w-full h-full z-0">
 				<TableHeader>
 					{headerRefs.map((ref, i, arr) => {
 						console.log(ref.current);
