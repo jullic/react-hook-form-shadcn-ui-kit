@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { FC, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { IExampleTable2Props } from './ExampleTable2.props';
@@ -25,7 +26,6 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 	const [defaultSize, setDefaultSize] = useState(0);
 	const [columnSizing, setColumnSizing] = useState<ColumnSizingState>({});
 	const [columnSizingInfo, setColumnSizingInfo] = useState<ColumnSizingInfoState>({} as ColumnSizingInfoState);
-	const refHeaderRefs = useRef<any>(null);
 
 	const colsWithSize = useMemo(() => cols.map((col) => ({ ...col, size: col.size ?? defaultSize })), [defaultSize]);
 	const table = useReactTable({
@@ -43,7 +43,6 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 		columnResizeMode: 'onChange',
 		onColumnSizingInfoChange: setColumnSizingInfo,
 		onColumnSizingChange: (value) => {
-			refHeaderRefs.current;
 			setColumnSizing(value);
 		},
 	});
@@ -54,7 +53,6 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 	const bodyRowsRefs = rowModel.rows.map((row) => useRef<HTMLTableRowElement>(null));
 
 	useLayoutEffect(() => {
-		refHeaderRefs.current = headerRefs;
 		if (!rootRef.current) {
 			return;
 		}
@@ -68,7 +66,7 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 	}, []);
 
 	return (
-		<div ref={rootRef} className="relative w-full border rounded-lg overflow-auto grid grid-cols-[minmax(1%,100%)_100%]">
+		<div ref={rootRef} className="relative w-full border rounded-lg overflow-auto grid grid-cols-[minmax(1%,100%)]">
 			<Table className="relative border-collapse w-full overflow-auto z-10" style={{ width: table.getTotalSize() }}>
 				<TableHeader className="w-full">
 					{headerGroups.map((headerGroup, rowI) => (
@@ -76,10 +74,10 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 							{headerGroup.headers.map((header, headerI, headers) => (
 								<TableHead
 									style={{ width: header.getSize() }}
-									className={cn('border', {
+									className={cn('border relative', {
 										['border-t-0']: rowI === 0,
 										['border-l-0']: headerI === 0,
-										['border-r-0']: headerI === headers.length - 1,
+										// ['border-r-0']: headerI === headers.length - 1,
 										// ['border-b-0']: rowI === rowModel.rows.length - 1,
 									})}
 									key={header.id}
@@ -89,7 +87,9 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 										<div
 											onMouseDown={header.getResizeHandler()}
 											onTouchStart={header.getResizeHandler()}
-											className="flex ml-auto w-2 h-full bg-red-400 cursor-pointer"
+											className={cn('absolute right-0 transform translatea-x-1/2 transition flex w-3 h-full hover:bg-primary cursor-ew-resize', {
+												['bg-chart-2 hover:bg-chart-2']: header.column.getIsResizing(),
+											})}
 										></div>
 									</div>
 								</TableHead>
@@ -104,7 +104,7 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 								<TableCell
 									className={cn('border', {
 										['border-l-0']: cellI === 0,
-										['border-r-0']: cellI === visibleCells.length - 1,
+										// ['border-r-0']: cellI === visibleCells.length - 1,
 										['border-b-0']: rowI === rowModel.rows.length - 1,
 									})}
 									key={cell.id}

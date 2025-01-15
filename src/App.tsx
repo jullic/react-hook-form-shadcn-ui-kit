@@ -64,9 +64,7 @@ function App() {
 					</Table>
 				</span>
 			</Wrap>
-			<Wrap>
-				<DataTableDemo />
-			</Wrap>
+			<Wrap>{/* <DataTableDemo /> */}</Wrap>
 			<Wrap>
 				<FormTextarea form={form} name="textarea" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
 			</Wrap>
