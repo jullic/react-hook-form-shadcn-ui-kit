@@ -1,0 +1,19 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+.header::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.header {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.test::-webkit-scrollbar {
+	/* height: 4px; Устанавливаем высоту для горизонтального скроллбара */
+	/* margin-top: 3px; */
+}
+
+.hidden-scroll::-webkit-scrollbar {
+	display: none;
+}

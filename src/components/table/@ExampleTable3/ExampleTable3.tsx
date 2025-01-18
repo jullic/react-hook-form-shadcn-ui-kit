@@ -3,6 +3,7 @@ import { FC, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { IExampleTable2Props } from './ExampleTable2.props';
 import { ColumnSizingInfoState, ColumnSizingState, createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import styles from './ExampleTable2.module.css';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/shadcn-ui/table';
 import { cn } from '@/lib/utils';
@@ -16,11 +17,19 @@ const columnHelper = createColumnHelper<Item>();
 
 const cols = [columnHelper.accessor('id', { header: 'Id' }), columnHelper.accessor('name', { header: 'Name' })];
 const data = [
-	{ id: '1', name: 'Test 1 lorem ipsum dolor sit amet long long text check test' },
+	{ id: '1', name: 'Test 1' },
 	{ id: '2', name: 'Test 2' },
+	{ id: '3', name: 'Test 3' },
+	{ id: '4', name: 'Test 4' },
+	{ id: '5', name: 'Test 5' },
+	{ id: '6', name: 'Test 6' },
+	{ id: '7', name: 'Test 7' },
+	{ id: '8', name: 'Test 8' },
+	{ id: '9', name: 'Test 9' },
+	{ id: '10', name: 'Test 10' },
 ];
 
-export const ExampleTable2: FC<IExampleTable2Props> = () => {
+export const ExampleTable3: FC<IExampleTable2Props> = () => {
 	const [_, forceUpdate] = useState({});
 	const rootRef = useRef<HTMLDivElement>(null);
 	const [defaultSize, setDefaultSize] = useState(0);
@@ -66,22 +75,13 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 	}, []);
 
 	return (
-		<div ref={rootRef} className="relative w-full border rounded-lg overflow-auto grid grid-cols-[minmax(1%,100%)]">
-			<Table className="relative border-collapse w-full overflow-auto z-10" style={{ width: table.getTotalSize() }}>
-				<TableHeader className="w-full">
-					{headerGroups.map((headerGroup, rowI) => (
-						<TableRow ref={headerRefs[rowI]} key={headerGroup.id} className="w-full">
+		<div className={cn('relative w-full max-h-64 border rounded-lg grid grid-rows-[min-content_minmax(1%,100%)] overflow-auto', styles.test)}>
+			<div className="w-full sticky top-0 bg-background z-10">
+				{headerGroups.map((headerGroup, rowI) => (
+					<div className="min-w-full w-min border-b">
+						<div ref={headerRefs[rowI]} key={headerGroup.id} className="w-full flex" style={{ width: table.getTotalSize() }}>
 							{headerGroup.headers.map((header, headerI, headers) => (
-								<TableHead
-									style={{ width: header.getSize() }}
-									className={cn('border relative', {
-										['border-t-0']: rowI === 0,
-										['border-l-0']: headerI === 0,
-										// ['border-r-0']: headerI === headers.length - 1,
-										// ['border-b-0']: rowI === rowModel.rows.length - 1,
-									})}
-									key={header.id}
-								>
+								<div style={{ width: header.getSize() }} className={cn('border-r relative p-2', {})} key={header.id}>
 									<div className="flex items-center h-full">
 										{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
 										<div
@@ -92,64 +92,27 @@ export const ExampleTable2: FC<IExampleTable2Props> = () => {
 											})}
 										></div>
 									</div>
-								</TableHead>
+								</div>
 							))}
-						</TableRow>
-					))}
-				</TableHeader>
-				<TableBody>
+						</div>
+					</div>
+				))}
+			</div>
+			<div ref={rootRef} className="relative">
+				<div>
 					{rowModel.rows?.map((row, rowI) => (
-						<TableRow ref={bodyRowsRefs[rowI]} key={row.id}>
-							{row.getVisibleCells().map((cell, cellI, visibleCells) => (
-								<TableCell
-									className={cn('border', {
-										['border-l-0']: cellI === 0,
-										// ['border-r-0']: cellI === visibleCells.length - 1,
-										['border-b-0']: rowI === rowModel.rows.length - 1,
-									})}
-									key={cell.id}
-								>
-									{flexRender(cell.column.columnDef.cell, cell.getContext())}
-								</TableCell>
-							))}
-						</TableRow>
+						<div className="min-w-full w-min border-b">
+							<div ref={bodyRowsRefs[rowI]} className="w-full flex " key={row.id} style={{ width: table.getTotalSize() }}>
+								{row.getVisibleCells().map((cell, cellI, visibleCells) => (
+									<div style={{ width: cell.column.getSize() }} className={cn('border-r p-2', {})} key={cell.id}>
+										{flexRender(cell.column.columnDef.cell, cell.getContext())}
+									</div>
+								))}
+							</div>
+						</div>
 					))}
-				</TableBody>
-			</Table>
-			{/* 
-			<Table className="absolute border-collapse w-full h-full z-0">
-				<TableHeader>
-					{headerRefs.map((ref, i, arr) => {
-						return (
-							<TableRow style={{ height: ref.current?.offsetHeight }} className="relative z-0">
-								<TableHead
-									className={cn('border', {
-										['border-t-0']: i === 0,
-										['border-l-0']: true,
-										['border-r-0']: true,
-										// ['border-b-0']: rowI === rowModel.rows.length - 1,
-									})}
-								></TableHead>
-							</TableRow>
-						);
-					})}
-				</TableHeader>
-				<TableBody>
-					{bodyRowsRefs.map((ref, i, arr) => {
-						return (
-							<TableRow style={{ height: ref.current?.offsetHeight }} className="relative z-0">
-								<TableCell
-									className={cn('border', {
-										['border-l-0']: true,
-										['border-r-0']: true,
-										['border-b-0']: i === arr.length - 1,
-									})}
-								></TableCell>
-							</TableRow>
-						);
-					})}
-				</TableBody>
-			</Table> */}
+				</div>
+			</div>
 		</div>
 	);
 };

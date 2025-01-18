@@ -20,9 +20,12 @@ import { Textarea } from './components/fields/Textarea';
 import { FormInput } from './components/@react-hook-form/FormInput';
 import { Slider } from './components/fields/Slider';
 import { Switch } from './components/fields/Switch';
-import { DataTableDemo } from './components/table/@ExampleTable/ExampleTable';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/shadcn-ui/table';
 import { ExampleTable2 } from './components/table';
+import { NativeTable } from './components/table/NativeTable/NativeTable';
+import { getCoreRowModel } from '@tanstack/react-table';
+import { ExampleTable3 } from './components/table/@ExampleTable3';
+import { ExampleTable4 } from './components/table/@ExampleTable3/ExampleTable4';
+import { ExampleTable5 } from './components/table/@ExampleTable3/ExampleTable5';
 
 const Wrap = ({ className, ...props }: ComponentProps<'div'>) => <div className={cn('p-8 flex flex-col gap-2', className)} {...props} />;
 
@@ -46,48 +49,76 @@ function App() {
 	return (
 		<div className="h-screen w-dasfull madsax-w-[100vw] p-4">
 			<Wrap>
+				<ExampleTable5 />
+			</Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap>
+				<ExampleTable4 />
+			</Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap>
+				<ExampleTable3 />
+			</Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap>
+				<NativeTable
+					classNames={{ root: 'max-h-40' }}
+					stickyHeader
+					tanstackOptions={{
+						columnResizeMode: 'onChange',
+						columns: [
+							{ accessorKey: 'id', header: 'Id' },
+							{ accessorKey: 'name', header: 'Name', size: 150 },
+						],
+						data: [
+							{ id: 1, name: 'test 1' },
+							{ id: 2, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
+							{ id: 3, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
+							{ id: 4, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
+							{ id: 5, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
+							{ id: 6, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
+						],
+						getCoreRowModel: getCoreRowModel(),
+					}}
+				/>
+			</Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+
+			<Wrap>
 				<ExampleTable2 />
 			</Wrap>
-			<Wrap>
-				<span>
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>1</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							<TableRow>
-								<TableCell>1</TableCell>
-							</TableRow>
-						</TableBody>
-					</Table>
-				</span>
-			</Wrap>
+			<Wrap></Wrap>
 			<Wrap>{/* <DataTableDemo /> */}</Wrap>
 			<Wrap>
-				<FormTextarea form={form} name="textarea" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormTextarea form={form} name="textarea" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<Wrap>
-				<FormSwitch form={form} name="switch" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormSwitch form={form} name="switch" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<Wrap>
-				<FormInput form={form} name="input" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormInput form={form} name="input" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<Wrap>
-				<FormCheckbox form={form} name="checkbox" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormCheckbox form={form} name="checkbox" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<Wrap>
-				<FormPasswordInput form={form} name="password" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormPasswordInput form={form} name="password" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<Wrap>
-				<FormSelect form={form} name="select" options={[{ label: 'one', value: 1 }]} label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormSelect form={form} name="select" options={[{ label: 'one', value: 1 }]} label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<Wrap>
-				<FormDatePicker form={form} name="date" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormDatePicker form={form} name="date" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<Wrap>
-				<FormDateTimePicker form={form} name="dateTime" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" disabled />
+				<FormDateTimePicker form={form} name="dateTime" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
 			<hr />
 			<hr />
