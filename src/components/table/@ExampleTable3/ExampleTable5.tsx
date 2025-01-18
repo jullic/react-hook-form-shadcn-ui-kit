@@ -113,7 +113,7 @@ export const ExampleTable5: FC<IExampleTable2Props> = () => {
 	useEffect(() => {
 		updateScrollbars();
 
-		tableRef.current?.addEventListener('scroll', () => {
+		const tableScrollHandler = () => {
 			if (scrollType.current !== 'table' && scrollType.current !== null) {
 				return;
 			}
@@ -124,11 +124,8 @@ export const ExampleTable5: FC<IExampleTable2Props> = () => {
 			}, 100);
 			verticalScrollRef!.current!.scrollTop = tableRef.current!.scrollTop;
 			horizontalScrollRef!.current!.scrollLeft = tableRef.current!.scrollLeft;
-		});
-		tableRef.current?.addEventListener('scrollend', () => {
-			scrollType.current = null;
-		});
-		verticalScrollRef.current?.addEventListener('scroll', () => {
+		};
+		const verticalScrollHandler = () => {
 			if (scrollType.current !== 'vertical' && scrollType.current !== null) {
 				return;
 			}
@@ -138,11 +135,8 @@ export const ExampleTable5: FC<IExampleTable2Props> = () => {
 				scrollType.current = null;
 			}, 100);
 			tableRef!.current!.scrollTop = verticalScrollRef.current!.scrollTop;
-		});
-		verticalScrollRef.current?.addEventListener('scrollend', () => {
-			scrollType.current = null;
-		});
-		horizontalScrollRef.current?.addEventListener('scroll', () => {
+		};
+		const horizontalScrollHandler = () => {
 			if (scrollType.current !== 'horizontal' && scrollType.current !== null) {
 				return;
 			}
@@ -152,10 +146,30 @@ export const ExampleTable5: FC<IExampleTable2Props> = () => {
 				scrollType.current = null;
 			}, 100);
 			tableRef!.current!.scrollLeft = horizontalScrollRef.current!.scrollLeft;
-		});
-		horizontalScrollRef.current?.addEventListener('scrollend', () => {
+		};
+		const scrollEndHandler = () => {
 			scrollType.current = null;
-		});
+		};
+
+		tableRef.current?.addEventListener('scroll', tableScrollHandler);
+		tableRef.current?.addEventListener('scrollend', scrollEndHandler);
+
+		verticalScrollRef.current?.addEventListener('scroll', verticalScrollHandler);
+		verticalScrollRef.current?.addEventListener('scrollend', scrollEndHandler);
+
+		horizontalScrollRef.current?.addEventListener('scroll', horizontalScrollHandler);
+		horizontalScrollRef.current?.addEventListener('scrollend', scrollEndHandler);
+
+		return () => {
+			tableRef.current?.removeEventListener('scroll', tableScrollHandler);
+			tableRef.current?.removeEventListener('scrollend', scrollEndHandler);
+
+			verticalScrollRef.current?.removeEventListener('scroll', verticalScrollHandler);
+			verticalScrollRef.current?.removeEventListener('scrollend', scrollEndHandler);
+
+			horizontalScrollRef.current?.removeEventListener('scroll', horizontalScrollHandler);
+			horizontalScrollRef.current?.removeEventListener('scrollend', scrollEndHandler);
+		};
 	}, []);
 
 	const headerGroups = table.getHeaderGroups();
