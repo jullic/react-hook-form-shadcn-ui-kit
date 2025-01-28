@@ -1,1 +1,1 @@
-export * from './@ExampleTable2';
+export * from './MaxTable';

@@ -40,6 +40,17 @@ const data = [
 	{ id: '10', age: 1, name: 'Test 10' },
 ];
 
+const classNames = {
+	root: cn('overflow-hidden relative'),
+	table: cn('w-full h-64 grid grid-rows-[min-content_minmax(1%,100%)] border rounded-lg overflow-x-scroll overflow-y-scroll', styles['hidden-scroll']),
+	tableHeader: cn('max-w-full sticky top-0 bg-background z-10'),
+	tableHeaderRow: cn('border-b min-w-full w-min flex'),
+	tableHead: cn('header-cell text-muted-foreground'),
+	tableBody: cn('max-w-full'),
+	tableBodyRow: cn('min-w-full w-min flex'),
+	tableBodyCell: cn('flex justify-center items-center border-r'),
+};
+
 export const ExampleTable5: FC<IExampleTable2Props> = () => {
 	const [_, forceUpdate] = useState({});
 
@@ -176,13 +187,13 @@ export const ExampleTable5: FC<IExampleTable2Props> = () => {
 	const rowModel = table.getRowModel();
 
 	return (
-		<div ref={rootRef} className="overflow-hidden relative">
-			<div ref={tableRef} className={cn('w-full h-64 grid grid-rows-[min-content_minmax(1%,100%)] border overflow-x-scroll overflow-y-scroll', styles['hidden-scroll'])}>
-				<div data-table-component="header" ref={headerRef} className={cn('max-w-full sticky top-0 bg-background !!!!!!! z-10')}>
+		<div ref={rootRef} className={cn(classNames.root)}>
+			<div ref={tableRef} className={cn(classNames.table)}>
+				<div data-table-component="header" ref={headerRef} className={cn(classNames.tableHeader)}>
 					{headerGroups.map((row) => (
-						<div style={{ width: table.getTotalSize() }} key={row.id} data-table-component="row" className="border-b min-w-full w-min flex">
+						<div style={{ width: table.getTotalSize() }} key={row.id} data-table-component="row" className={cn(classNames.tableHeaderRow)}>
 							{row.headers.map((cell) => (
-								<div style={{ width: cell.getSize() }} key={cell.id} data-table-component="header-cell" className={cn('', 'border-r')}>
+								<div style={{ width: cell.getSize() }} key={cell.id} data-table-component={'header-cell'} className={cn(classNames.tableHead, 'border-r')}>
 									<div className="relative flex items-center h-full">
 										<span className="block p-4 w-full">
 											<span className="block text-ellipsis whitespace-nowrap text-nowrap w-full overflow-hidden">
@@ -202,19 +213,19 @@ export const ExampleTable5: FC<IExampleTable2Props> = () => {
 						</div>
 					))}
 				</div>
-				<div data-table-component="content" ref={bodyRef} className={cn('max-w-full')}>
+				<div data-table-component="content" ref={bodyRef} className={cn(classNames.tableBody)}>
 					<div>
 						{rowModel.rows.map((row, rowI, arr) => (
 							<div
 								style={{ width: table.getTotalSize() }}
 								key={row.id}
 								data-table-component="row"
-								className={cn('min-w-full w-min flex', { ['border-b']: arr.length - 1 !== rowI })}
+								className={cn(classNames.tableBodyRow, { ['border-b']: arr.length - 1 !== rowI })}
 							>
 								{row.getVisibleCells().map((cell) => {
 									return (
-										<div style={{ width: cell.column.getSize() }} key={cell.id} data-table-component="header-cell" className={cn('', 'border-r')}>
-											<span className="block p-4">
+										<div style={{ width: cell.column.getSize() }} key={cell.id} data-table-component="body-cell" className={cn(classNames.tableBodyCell)}>
+											<span className="block p-4 w-full">
 												<span className="block text-ellipsis text-nowrap w-full overflow-hidden">
 													{flexRender(cell.column.columnDef.cell, cell.getContext())}
 												</span>

@@ -20,12 +20,10 @@ import { Textarea } from './components/fields/Textarea';
 import { FormInput } from './components/@react-hook-form/FormInput';
 import { Slider } from './components/fields/Slider';
 import { Switch } from './components/fields/Switch';
-import { ExampleTable2 } from './components/table';
-import { NativeTable } from './components/table/NativeTable/NativeTable';
+
 import { getCoreRowModel } from '@tanstack/react-table';
-import { ExampleTable3 } from './components/table/@ExampleTable3';
-import { ExampleTable4 } from './components/table/@ExampleTable3/ExampleTable4';
 import { ExampleTable5 } from './components/table/@ExampleTable3/ExampleTable5';
+import { MaxTable } from './components/table';
 
 const Wrap = ({ className, ...props }: ComponentProps<'div'>) => <div className={cn('p-8 flex flex-col gap-2', className)} {...props} />;
 
@@ -49,40 +47,44 @@ function App() {
 	return (
 		<div className="h-screen w-dasfull madsax-w-[100vw] p-4">
 			<Wrap>
-				<ExampleTable5 />
-			</Wrap>
-			<Wrap></Wrap>
-			<Wrap></Wrap>
-			<Wrap></Wrap>
-			<Wrap>
-				<ExampleTable4 />
-			</Wrap>
-			<Wrap></Wrap>
-			<Wrap></Wrap>
-			<Wrap></Wrap>
-			<Wrap>
-				<ExampleTable3 />
-			</Wrap>
-			<Wrap></Wrap>
-			<Wrap></Wrap>
-			<Wrap></Wrap>
-			<Wrap>
-				<NativeTable
-					classNames={{ root: 'max-h-40' }}
-					stickyHeader
+				<MaxTable
+					classNames={{ table: 'max-h-[400px]' }}
 					tanstackOptions={{
-						columnResizeMode: 'onChange',
+						enableMultiSort: true,
 						columns: [
-							{ accessorKey: 'id', header: 'Id' },
-							{ accessorKey: 'name', header: 'Name', size: 150 },
+							{ accessorKey: 'id', searchable: true, editableCellType: 'boolean' },
+							{
+								accessorKey: 'name',
+								searchable: true,
+							},
 						],
+						// columns: [
+						// 	{
+						// 		header: 'Name',
+						// 		columns: [
+						// 			{
+						// 				header: 'First Name',
+						// 				accessorKey: 'id',
+						// 			},
+						// 		],
+						// 	},
+						// 	{
+						// 		searchable: true,
+						// 		header: 'Info',
+						// 		columns: [
+						// 			{
+						// 				header: 'Age',
+						// 				accessorKey: 'name',
+						// 			},
+						// 		],
+						// 	},
+						// ],
 						data: [
-							{ id: 1, name: 'test 1' },
-							{ id: 2, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
-							{ id: 3, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
-							{ id: 4, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
-							{ id: 5, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
-							{ id: 6, name: "test 2 very ochen' dliini text lorem ipsum dolor sit amet" },
+							{ id: 1, name: 'test' },
+							{ id: 2, name: 'test long text lorem ipsum' },
+							{ id: 3, name: 'test long text lorem ipsum' },
+							{ id: 4, name: 'test long text lorem ipsum' },
+							{ id: 5, name: 'test long text lorem ipsum' },
 						],
 						getCoreRowModel: getCoreRowModel(),
 					}}
@@ -90,12 +92,16 @@ function App() {
 			</Wrap>
 			<Wrap></Wrap>
 			<Wrap></Wrap>
-
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
 			<Wrap>
-				<ExampleTable2 />
+				<ExampleTable5 />
 			</Wrap>
 			<Wrap></Wrap>
-			<Wrap>{/* <DataTableDemo /> */}</Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
 			<Wrap>
 				<FormTextarea form={form} name="textarea" label=" jdksadk jdkasj dkasjdkajsk djsak djaksjd aksjdksaj k" />
 			</Wrap>
