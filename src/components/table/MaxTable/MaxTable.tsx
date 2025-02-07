@@ -74,30 +74,29 @@ export const MaxTable = <TData extends RowData>({ tanstackOptions, headerCellPos
 							data-table-component="row"
 							className={cn(defaultClassNames.tableHeaderRow, classNames?.tableHeaderRow)}
 						>
-							{row.headers.map((cell, i, arr) => (
+							{row.headers.map((headerCell, i, arr) => (
 								<div
-									style={{ width: cell.getSize() }}
-									key={cell.id}
+									style={{ width: headerCell.getSize() }}
+									key={headerCell.id}
 									data-table-component={'header-cell'}
 									className={cn(defaultClassNames.tableHead, classNames?.tableHead)}
 								>
 									<div className="relative flex items-center h-full">
 										<span className="block p-4 w-full">
 											<span className="block text-ellipsis whitespace-nowrap text-nowrap w-full overflow-hidden text-muted-foreground">
-												{cell.isPlaceholder ? null : flexRender(cell.column.columnDef.header, cell.getContext())}
-												{console.log(cell.column.columnDef)}
-												{cell.column.getCanSort() && rowI == headerGroups.length - 1 && (
-													<div className="h-10 w-4" onClick={cell.column.getToggleSortingHandler()}>
-														{getSortValue(cell.column.getIsSorted())}
+												{headerCell.isPlaceholder ? null : flexRender(headerCell.column.columnDef.header, headerCell.getContext())}
+												{headerCell.column.getCanSort() && rowI == headerGroups.length - 1 && (
+													<div className="h-10 w-4" onClick={headerCell.column.getToggleSortingHandler()}>
+														{getSortValue(headerCell.column.getIsSorted())}
 													</div>
 												)}
 											</span>
 										</span>
 										<div
-											onMouseDown={cell.getResizeHandler()}
-											onTouchStart={cell.getResizeHandler()}
+											onMouseDown={headerCell.getResizeHandler()}
+											onTouchStart={headerCell.getResizeHandler()}
 											className={cn('absolute right-0 transition flex w-2 h-full hover:bg-primary cursor-ew-resize', {
-												['bg-chart-2 hover:bg-chart-2']: cell.column.getIsResizing(),
+												['bg-chart-2 hover:bg-chart-2']: headerCell.column.getIsResizing(),
 											})}
 										></div>
 									</div>

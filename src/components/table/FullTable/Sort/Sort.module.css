@@ -1,0 +1,9 @@
+.sort.asc path:nth-child(1),
+.sort.asc path:nth-child(2) {
+	@apply text-chart-2;
+}
+
+.sort.desc path:nth-child(3),
+.sort.desc path:nth-child(4) {
+	@apply text-chart-2;
+}

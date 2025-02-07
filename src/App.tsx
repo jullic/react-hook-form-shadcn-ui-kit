@@ -23,7 +23,7 @@ import { Switch } from './components/fields/Switch';
 
 import { getCoreRowModel } from '@tanstack/react-table';
 import { ExampleTable5 } from './components/table/@ExampleTable3/ExampleTable5';
-import { MaxTable } from './components/table';
+import { FullTable, MaxTable } from './components/table';
 
 const Wrap = ({ className, ...props }: ComponentProps<'div'>) => <div className={cn('p-8 flex flex-col gap-2', className)} {...props} />;
 
@@ -47,14 +47,15 @@ function App() {
 	return (
 		<div className="h-screen w-dasfull madsax-w-[100vw] p-4">
 			<Wrap>
-				<MaxTable
-					classNames={{ table: 'max-h-[400px]' }}
+				<FullTable
+					classNames={{ table: 'max-h-[300px]' }}
 					tanstackOptions={{
 						enableMultiSort: true,
 						columns: [
 							{ accessorKey: 'id', searchable: true, editableCellType: 'boolean' },
 							{
 								accessorKey: 'name',
+								header: 'long text name title',
 								searchable: true,
 							},
 						],
