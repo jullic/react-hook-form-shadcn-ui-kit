@@ -23,7 +23,7 @@ import { Switch } from './components/fields/Switch';
 
 import { getCoreRowModel } from '@tanstack/react-table';
 import { ExampleTable5 } from './components/table/@ExampleTable3/ExampleTable5';
-import { FullTable, MaxTable } from './components/table';
+import { FullTable } from './components/table';
 
 const Wrap = ({ className, ...props }: ComponentProps<'div'>) => <div className={cn('p-8 flex flex-col gap-2', className)} {...props} />;
 
@@ -97,6 +97,16 @@ function App() {
 			<Wrap></Wrap>
 			<Wrap></Wrap>
 			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+			<Wrap></Wrap>
+
 			<Wrap>
 				<ExampleTable5 />
 			</Wrap>
